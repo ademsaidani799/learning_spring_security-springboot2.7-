@@ -6,14 +6,14 @@ public enum ApplicationUserPermission {
     COURSE_READ("course:read"),
     COURSE_WRITE("course:write");
 
-    private final String permisson;
+    private final String permission;
 
-    ApplicationUserPermission(String permisson){
-        this.permisson = permisson;
+    ApplicationUserPermission(String permission){
+        this.permission = permission;
     }
 
-    public String getPermisson() {
-        return permisson;
+    public String getPermission() {
+        return permission;
     }
 }
 
