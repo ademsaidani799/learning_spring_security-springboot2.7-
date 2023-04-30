@@ -33,15 +33,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/","index","css/*","js/*").permitAll()
                 .antMatchers("/api/**").hasRole(STUDENT.name())
-           /*     .antMatchers(HttpMethod.DELETE,"/management/api/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.getPermission())
-                .antMatchers(HttpMethod.PUT,"/management/api/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.getPermission())
-                .antMatchers(HttpMethod.POST,"/management/api/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.getPermission())
-                .antMatchers("/management/api/**").hasAnyRole(ApplicationUserRole.ADMIN.name(),ApplicationUserRole.ADMINTRAINEE.name())*/
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -53,7 +50,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected UserDetailsService userDetailsService() {
         UserDetails annaSmithUser = User.builder()
                 .username("annasmith")
-                .password(passwordEncoder.encode("password"))
+                .password(passwordEncoder.encode("password123"))
                 //.roles(ApplicationUserRole.STUDENT.name()) //ROLE_STUDENT
                 .authorities(STUDENT.getGrantedAuthorities())
                 .build();
