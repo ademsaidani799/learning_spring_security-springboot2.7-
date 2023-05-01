@@ -42,7 +42,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+               // .httpBasic();
+                .formLogin()
+                .loginPage("/login").permitAll();
     }
 
     @Override
@@ -50,7 +52,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected UserDetailsService userDetailsService() {
         UserDetails annaSmithUser = User.builder()
                 .username("annasmith")
-                .password(passwordEncoder.encode("password123"))
+                .password(passwordEncoder.encode("password"))
                 //.roles(ApplicationUserRole.STUDENT.name()) //ROLE_STUDENT
                 .authorities(STUDENT.getGrantedAuthorities())
                 .build();
