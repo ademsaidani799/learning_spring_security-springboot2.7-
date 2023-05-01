@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TemplateController {
 
     @GetMapping("login")
-    public String getLoginView(){
+    public String getLogin(){
         return "login"; //the retunred must be the same as the name of the file in the resources but wihtout the extension
     }
 
+    @GetMapping("courses")
+    public String getCourses(){
+        return "courses"; //the retunred must be the same as the name of the file in the resources but wihtout the extension
+    }
 }
