@@ -16,14 +16,15 @@ public class StudentMangementController {
     );
 
     @PostMapping()
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ADMINTREE')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ADMINTRAINEE')")
     public void registerNewStudent(@RequestBody Student student){
         System.out.println(student);
 
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('student:write')")
+ //   @PreAuthorize("hasAnyAuthority('student:write')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ADMINTRAINEE')")
     public List<Student> getAllStudents() {
         return STUDENTS;
     }
