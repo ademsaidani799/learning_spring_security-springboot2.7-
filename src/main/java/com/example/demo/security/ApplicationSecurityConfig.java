@@ -54,7 +54,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 // .httpBasic();
                 .formLogin()
                 .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/courses")
+                .defaultSuccessUrl("/courses",true)
                 .passwordParameter("password")
                 .usernameParameter("username")
                 .and()
