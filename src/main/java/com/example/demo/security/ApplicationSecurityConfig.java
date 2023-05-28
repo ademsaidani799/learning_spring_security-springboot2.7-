@@ -1,6 +1,7 @@
 package com.example.demo.security;
 
 import com.example.demo.auth.ApplicationUserService;
+import com.example.demo.jwt.JwtTokenVerifier;
 import com.example.demo.jwt.jwtUsernameAndPasswordAuthenticationFilter;
 import com.example.demo.student.Student;
 import org.springframework.beans.factory.annotation.Autowired;
