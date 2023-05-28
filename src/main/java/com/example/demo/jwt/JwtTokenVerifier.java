@@ -25,27 +25,29 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class JwtTokenVerifier extends OncePerRequestFilter {
+    private final JwtConfig jwtConfig;
+    private final SecretKey secretKey;
 
 
-    public JwtTokenVerifier() {
-
+    public JwtTokenVerifier(JwtConfig jwtConfig, SecretKey secretKey) {
+        this.jwtConfig = jwtConfig;
+        this.secretKey = secretKey;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String authorizationHeader = request.getHeader("Authorization");
+        String authorizationHeader = request.getHeader(jwtConfig.getAuthorizationHeader());
 
         // Reject the request as it cannot be authenticated
-        if(Strings.isNullOrEmpty(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")) {
+        if(Strings.isNullOrEmpty(authorizationHeader) || !authorizationHeader.startsWith(jwtConfig.getTokenPrefix())) {
             filterChain.doFilter(request, response);
             return;
         }
 
         try {
-            String token = authorizationHeader.replace("Bearer ", "");
-            String secretKey = "securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecuresecure";
+            String token = authorizationHeader.replace(jwtConfig.getTokenPrefix(),"");
 
             Jws<Claims> claimsJws = Jwts.parser()
                     .setSigningKey(secretKey)
